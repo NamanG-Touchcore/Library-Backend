@@ -55,7 +55,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
-app.UseCors(options => options.WithOrigins("http://localhost:4200", "http://localhost:5500").AllowAnyHeader().AllowAnyMethod());
+app.UseCors(options => options.WithOrigins("http://localhost:4200", "http://localhost:5500", "https://nice-bay-0b9fc0d00.1.azurestaticapps.net").AllowAnyHeader().AllowAnyMethod());
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
