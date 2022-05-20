@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 // PUT books/:bookId/issues
 
 namespace Library.Controllers;
-[Authorize]
+// [Authorize]
 [ApiController]
 [Route("books")]
 
@@ -31,7 +31,8 @@ public class BookController : ControllerBase
         return Ok(repo2.GetBookRecord().ToList());
 
     }
-    [HttpPut, Authorize(Roles = "Admin")]
+    // [HttpPut, Authorize(Roles = "Admin")]
+    [HttpPut]
     public IActionResult Put(IBook book)
     {
         return Ok(repo2.addBook(book));
@@ -52,12 +53,14 @@ public class BookController : ControllerBase
     {
         return Ok(repo2.getBook(bookId));
     }
-    [HttpPut("{bookId}"), Authorize(Roles = "Admin")]
-    public IActionResult Put(int bookId, IBook book)
+    // [HttpPut("{bookId}"), Authorize(Roles = "Admin")]
+    [HttpPut("{bookId}")]
+    public IActionResult Put(int bookId, IBookEF book)
     {
         return Ok(repo2.updateBook(bookId, book));
     }
-    [HttpDelete("{bookId}"), Authorize(Roles = "Admin")]
+    [HttpDelete("{bookId}")]
+    // [HttpDelete("{bookId}"), Authorize(Roles = "Admin")]
     public IActionResult Delete(int bookId)
     {
         return Ok(repo2.DeleteBook(bookId));
@@ -73,7 +76,7 @@ public class BookController : ControllerBase
     //     return issueRepo.GetIssue(issueId);
     // }
     [HttpPut("{bookId}/issues")]
-    public IActionResult PutIssues(int bookId, IIssue issue)
+    public IActionResult PutIssues(int bookId, IIssueEF issue)
     {
         return Ok(issueRepo.putIssues(bookId, issue));
     }
