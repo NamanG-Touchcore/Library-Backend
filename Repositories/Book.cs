@@ -89,22 +89,46 @@ namespace Library.Repositories
 
             try
             {
-                using (con = new SqlConnection(Constr))
-                {
-                    con.Open();
-                    var cmd = new SqlCommand("SELECT count(*) from bookTable", con);
-                    // cmd.CommandType=System.Data.CommandType.StoredProcedure;
-                    var rdr = Convert.ToInt32(cmd.ExecuteScalar());
-                    return rdr;
-                }
-                // return books.ToList();
-                return 0;
+                var books = (from b in context.bookTable
+                             where b.isBookActive == 1
+                             select new IBook
+                             {
+                                 id = b.bookId,
+                                 name = b.name,
+                                 author = b.author,
+                                 description = b.description,
+                                 coverImage = b.coverImage,
+                                 isBookActive = b.isBookActive,
+                                 activeIssues = b.activeIssues,
+                                 totalQuantity = b.totalQuantity,
+                                 issues = b.issues
+                             });
+                return books.Count();
             }
             catch (AppException e)
             {
                 throw e;
             }
         }
+        public IEnumerable<IBook> GetBooksByPage(int pageNumber, int pageSize)
+        {
+            var books = (from b in context.bookTable
+                         where b.isBookActive == 1
+                         select new IBook
+                         {
+                             id = b.bookId,
+                             name = b.name,
+                             author = b.author,
+                             description = b.description,
+                             coverImage = b.coverImage,
+                             isBookActive = b.isBookActive,
+                             activeIssues = b.activeIssues,
+                             totalQuantity = b.totalQuantity,
+                             issues = b.issues
+                         });
+            return (IEnumerable<IBook>)books.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        }
+
         public bool validateBook(IBook book)
         {
             if (book.name.Length > 0 && book.description.Length > 0 && book.author.Length > 0)
@@ -389,6 +413,7 @@ namespace Library.Repositories
         public IReturnStatement updateBook(int bookId, IBookEF book);
         public IReturnStatement DeleteBook(int bookId);
         public int getBookSize();
+        public IEnumerable<IBook> GetBooksByPage(int pageNo, int pageSize);
     }
 
 }

@@ -26,11 +26,18 @@ public class BookController : ControllerBase
     }
     // public static IssueRepo issueRepo =new();
     [HttpGet]
-    public IActionResult Get()
+    public IActionResult GetPaginatedBooks(int pageNo = -1, int pageSize = -1)
     {
+        if (pageNo > 0 && pageSize > 0)
+            return Ok(repo2.GetBooksByPage(pageNo, pageSize));
         return Ok(repo2.GetBookRecord().ToList());
-
     }
+    [HttpGet("count")]
+    public IActionResult GetBooksCount()
+    {
+        return Ok(repo2.getBookSize());
+    }
+
     // [HttpPut, Authorize(Roles = "Admin")]
     [HttpPut]
     public IActionResult Put(IBook book)
