@@ -41,14 +41,14 @@ namespace Library.Repositories
                     // string userPassword = Convert.ToString(rdr["password"]);
                     user.role = Convert.ToInt32(rdr["role"]);
                     tempSalt = Convert.ToString(rdr["userSalt"]);
-                    // var passwordSalt = Encoding.UTF8.GetBytes(tempSalt);
+                    // var passwordSalt = Convert.FromBase64String(tempSalt);
                     // for (int i = 0; i < tempSalt.Length; i++)
                     // {
                     // var tempStr = Convert.ToByte(tempSalt[i]);
                     // user.passwordSalt.Append(Convert.ToByte(tempSalt[i]));
                     // }
                     tempHash = Convert.ToString(rdr["userHash"]);
-                    // var passwordHash = Encoding.UTF8.GetBytes(tempHash);
+                    // var passwordHash = Convert.FromBase64String(tempHash);
                     // for (int i = 0; i < tempSalt.Length; i++)
                     // {
                     // user.passwodHash.Append(Convert.ToByte(tempHash[i]));
@@ -65,8 +65,8 @@ namespace Library.Repositories
                 {
                     throw new AppException("User not found!");
                 }
-                // else if (!verifyHash(password, Encoding.UTF8.GetBytes(tempHash), Encoding.UTF8.GetBytes(tempSalt)))
-                else if (user.password != password)
+                // else if (user.password != password)
+                else if (!verifyHash(password, Convert.FromBase64String(tempHash), Convert.FromBase64String(tempSalt)))
                 {
                     throw new AppException("Wrong Password");
                 }
@@ -82,7 +82,7 @@ namespace Library.Repositories
         }
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512())
+            using (var hmac = new HMACSHA512(Encoding.UTF8.GetBytes("This is a temp salt")))
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -95,8 +95,9 @@ namespace Library.Repositories
             if (password == "" || password.Length < 8)
                 throw new AppException("Password Invalid");
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-            string passwordHashString = Encoding.UTF8.GetString(passwordHash, 0, passwordHash.Length);
-            string passwordStaltString = Encoding.UTF8.GetString(passwordSalt, 0, passwordSalt.Length);
+            string passwordHashString = Convert.ToBase64String(passwordHash);
+            string passwordStaltString = Convert.ToBase64String(passwordSalt);
+            byte[] temp = Convert.FromBase64String(passwordStaltString);
             // currentSalt = passwordStaltString;
             int userId = -1;
             string query = $"INSERT INTO userTable (username, role, password)  VALUES  ('{username}','{role}','{password}')";
@@ -126,9 +127,9 @@ namespace Library.Repositories
         }
         private bool verifyHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(Encoding.UTF8.GetBytes("This is a temp salt")))
             {
-                // var computedHashString = Encoding.UTF8.GetString(hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
+                // var computedHashString = Encoding.UTF8.GetString(hmac.ComputeHash(System.Text.Convert.FromBase64String(password)));
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
