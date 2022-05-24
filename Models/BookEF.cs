@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Library.Models
 {
 
@@ -14,5 +15,8 @@ namespace Library.Models
         public int totalQuantity { get; set; }
         public int activeIssues { get; set; }
         public int isBookActive { get; set; }
+        [NotMapped]
+        public int maxSize { get; set; }
+
     }
 }

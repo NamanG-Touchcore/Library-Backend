@@ -19,11 +19,10 @@ namespace Library.Repositories
         public AuthRepo(IConfiguration _configuration)
         {
             configuration = _configuration;
-            // Constr=configuration.GetConnectionString("DbConnection");
             Constr = configuration.GetConnectionString("DbConnection");
             Console.WriteLine(Constr);
         }
-        public IUser login(string username, string password)
+        public IUser login(string? username, string? password)
         {
             string tempSalt = "", tempHash = "";
             using (con = new SqlConnection(Constr))
@@ -37,27 +36,9 @@ namespace Library.Repositories
                     user.username = Convert.ToString(rdr["username"]);
                     user.password = Convert.ToString(rdr["password"]);
                     user.id = Convert.ToInt32(rdr["userId"]);
-                    // bool tempPass = user.password != password;
-                    // string userPassword = Convert.ToString(rdr["password"]);
                     user.role = Convert.ToInt32(rdr["role"]);
                     tempSalt = Convert.ToString(rdr["userSalt"]);
-                    // var passwordSalt = Convert.FromBase64String(tempSalt);
-                    // for (int i = 0; i < tempSalt.Length; i++)
-                    // {
-                    // var tempStr = Convert.ToByte(tempSalt[i]);
-                    // user.passwordSalt.Append(Convert.ToByte(tempSalt[i]));
-                    // }
                     tempHash = Convert.ToString(rdr["userHash"]);
-                    // var passwordHash = Convert.FromBase64String(tempHash);
-                    // for (int i = 0; i < tempSalt.Length; i++)
-                    // {
-                    // user.passwodHash.Append(Convert.ToByte(tempHash[i]));
-                    // }
-                    // if (!verifyHash(user.password, user.passwordHash, user.passwordSalt))
-                    // {
-                    //     // var val = verifyHash(user.password, user.passwordHash, user.passwordSalt);
-                    //     return tempHash + " " + tempSalt;
-                    // }
 
                 }
                 string userPassword = user.password;
@@ -65,7 +46,6 @@ namespace Library.Repositories
                 {
                     throw new AppException("User not found!");
                 }
-                // else if (user.password != password)
                 else if (!verifyHash(password, Convert.FromBase64String(tempHash), Convert.FromBase64String(tempSalt)))
                 {
                     throw new AppException("Wrong Password");
@@ -88,7 +68,7 @@ namespace Library.Repositories
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-        public IUser register(string username, string password, int role)
+        public IUser register(string? username, string? password, int role)
         {
             if (username == "")
                 throw new AppException("Username Invalid!");
@@ -98,7 +78,6 @@ namespace Library.Repositories
             string passwordHashString = Convert.ToBase64String(passwordHash);
             string passwordStaltString = Convert.ToBase64String(passwordSalt);
             byte[] temp = Convert.FromBase64String(passwordStaltString);
-            // currentSalt = passwordStaltString;
             int userId = -1;
             string query = $"INSERT INTO userTable (username, role, password)  VALUES  ('{username}','{role}','{password}')";
             using (con = new SqlConnection(Constr))
@@ -129,7 +108,6 @@ namespace Library.Repositories
         {
             using (var hmac = new HMACSHA512(Encoding.UTF8.GetBytes("This is a temp salt")))
             {
-                // var computedHashString = Encoding.UTF8.GetString(hmac.ComputeHash(System.Text.Convert.FromBase64String(password)));
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
@@ -154,7 +132,7 @@ namespace Library.Repositories
 
     public interface IAuthRepo
     {
-        public IUser login(string username, string password);
-        public IUser register(string username, string password, int role);
+        public IUser login(string? username, string? password);
+        public IUser register(string? username, string? password, int role);
     }
 }

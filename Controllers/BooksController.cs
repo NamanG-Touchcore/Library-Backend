@@ -24,7 +24,6 @@ public class BookController : ControllerBase
         repo2 = _repo;
         issueRepo = _issueRepo;
     }
-    // public static IssueRepo issueRepo =new();
     [HttpGet]
     public IActionResult GetPaginatedBooks(int pageNo = -1, int pageSize = -1)
     {
@@ -38,36 +37,28 @@ public class BookController : ControllerBase
         return Ok(repo2.getBookSize());
     }
 
-    // [HttpPut, Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut, Authorize(Roles = "Admin")]
     public IActionResult Put(IBook book)
     {
         return Ok(repo2.addBook(book));
     }
-    [HttpGet("query/{query}")]
-    public IActionResult GetQueriedBooks(string query)
-    {
-        return Ok(repo2.GetBookQueries(query));
-    }
+
     [HttpGet("issues")]
     public IActionResult GetIssues()
     {
         return Ok(issueRepo.GetIssues());
     }
-    // This method is redundant because the implementation of selective data to be returned from the query is yet to be implemented, therefore there is no point of a separate route that returns the specific book information
     [HttpGet("{bookId}")]
     public IActionResult Get(int bookId)
     {
         return Ok(repo2.getBook(bookId));
     }
-    // [HttpPut("{bookId}"), Authorize(Roles = "Admin")]
-    [HttpPut("{bookId}")]
+    [HttpPut("{bookId}"), Authorize(Roles = "Admin")]
     public IActionResult Put(int bookId, IBookEF book)
     {
         return Ok(repo2.updateBook(bookId, book));
     }
-    [HttpDelete("{bookId}")]
-    // [HttpDelete("{bookId}"), Authorize(Roles = "Admin")]
+    [HttpDelete("{bookId}"), Authorize(Roles = "Admin")]
     public IActionResult Delete(int bookId)
     {
         return Ok(repo2.DeleteBook(bookId));
@@ -77,11 +68,6 @@ public class BookController : ControllerBase
     {
         return Ok(issueRepo.GetIssuesByBookId(bookId));
     }
-    // [HttpGet("{bookId}/issue/{issueId}")]
-    // public IIssue GetIssue(int issueId)
-    // {
-    //     return issueRepo.GetIssue(issueId);
-    // }
     [HttpPut("{bookId}/issues")]
     public IActionResult PutIssues(int bookId, IIssueEF issue)
     {
@@ -92,9 +78,4 @@ public class BookController : ControllerBase
     {
         return Ok(issueRepo.putIssue(bookId, issueId, isActive, fine));
     }
-    // [HttpPut("{bookId}/issues/{issueId}")]
-    // public void PutIssue(int bookId, int IssueId, IIssue issue)
-    // {
-
-    // }
 }
