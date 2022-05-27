@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\Assignment\\Backend\\Library.csproj": {}
+    "d:\\Work\\Assignment\\Backend\\Library.csproj": {}
   },
   "projects": {
-    "D:\\Work\\Assignment\\Backend\\Library.csproj": {
+    "d:\\Work\\Assignment\\Backend\\Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\Assignment\\Backend\\Library.csproj",
+        "projectUniqueName": "d:\\Work\\Assignment\\Backend\\Library.csproj",
         "projectName": "Library",
-        "projectPath": "D:\\Work\\Assignment\\Backend\\Library.csproj",
+        "projectPath": "d:\\Work\\Assignment\\Backend\\Library.csproj",
         "packagesPath": "C:\\Users\\suman\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\Assignment\\Backend\\obj\\",
+        "outputPath": "d:\\Work\\Assignment\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,7 +25,6 @@
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +43,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Autofac.WebApi2": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
               "version": "[2.2.0, )"

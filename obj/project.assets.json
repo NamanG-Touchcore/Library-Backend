@@ -2,6 +2,27 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Autofac/6.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "4.7.1"
+        },
+        "compile": {
+          "lib/net6.0/Autofac.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Autofac.dll": {}
+        }
+      },
+      "Autofac.WebApi2/6.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net472/Autofac.Integration.WebApi.dll": {}
+        },
+        "runtime": {
+          "lib/net472/Autofac.Integration.WebApi.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1110,6 +1131,42 @@
     }
   },
   "libraries": {
+    "Autofac/6.4.0": {
+      "sha512": "tkFxl6wAPuwVhrlN8wuNADnd+k2tv4ReP7ZZSL0vjfcN0RcfC9v25ogxK6b03HC7D4NwWjSLf1G/zTG8Bw43wQ==",
+      "type": "package",
+      "path": "autofac/6.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "autofac.6.4.0.nupkg.sha512",
+        "autofac.nuspec",
+        "icon.png",
+        "lib/net5.0/Autofac.dll",
+        "lib/net5.0/Autofac.xml",
+        "lib/net6.0/Autofac.dll",
+        "lib/net6.0/Autofac.xml",
+        "lib/netstandard2.0/Autofac.dll",
+        "lib/netstandard2.0/Autofac.xml",
+        "lib/netstandard2.1/Autofac.dll",
+        "lib/netstandard2.1/Autofac.xml"
+      ]
+    },
+    "Autofac.WebApi2/6.1.0": {
+      "sha512": "rEMduvctqpWsFpmJmq/O4/H8wCg7Q2MSKlzWQMWVb5NwPMU1Di5N69a/NVcXKcwp9bfh2VtAPdRfcWnp2RFv+Q==",
+      "type": "package",
+      "path": "autofac.webapi2/6.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autofac.webapi2.6.1.0.nupkg.sha512",
+        "autofac.webapi2.nuspec",
+        "icon.png",
+        "lib/net472/Autofac.Integration.WebApi.dll",
+        "lib/net472/Autofac.Integration.WebApi.pdb",
+        "lib/net472/Autofac.Integration.WebApi.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
       "sha512": "b0R9X7L6zMqNsssKDvhYHuNi5x0s4DyHTeXybIAyGaitKiW1Q5aAGKdV2codHPiePv9yHfC9hAMyScXQ/xXhPw==",
       "type": "package",
@@ -3016,6 +3073,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Autofac >= 6.4.0",
+      "Autofac.WebApi2 >= 6.1.0",
       "Microsoft.AspNetCore.Authentication >= 2.2.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.4",
       "Microsoft.AspNetCore.Cors >= 2.2.0",
@@ -3036,11 +3095,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\Assignment\\Backend\\Library.csproj",
+      "projectUniqueName": "d:\\Work\\Assignment\\Backend\\Library.csproj",
       "projectName": "Library",
-      "projectPath": "D:\\Work\\Assignment\\Backend\\Library.csproj",
+      "projectPath": "d:\\Work\\Assignment\\Backend\\Library.csproj",
       "packagesPath": "C:\\Users\\suman\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\Assignment\\Backend\\obj\\",
+      "outputPath": "d:\\Work\\Assignment\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3054,7 +3113,6 @@
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3073,6 +3131,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Autofac": {
+            "target": "Package",
+            "version": "[6.4.0, )"
+          },
+          "Autofac.WebApi2": {
+            "target": "Package",
+            "version": "[6.1.0, )"
+          },
           "Microsoft.AspNetCore.Authentication": {
             "target": "Package",
             "version": "[2.2.0, )"
@@ -3139,5 +3205,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Autofac.WebApi2 6.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Autofac.WebApi2",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

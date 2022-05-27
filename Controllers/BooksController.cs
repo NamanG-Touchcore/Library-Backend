@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 // PUT books/:bookId/issues
 
 namespace Library.Controllers;
-// [Authorize]
+[Authorize]
 [ApiController]
 [Route("books")]
 

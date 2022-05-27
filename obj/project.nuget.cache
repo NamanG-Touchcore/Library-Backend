@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "sG0K3ivpiD3zlgayIvPDFRIYYUyO5+ojl+GLLQ2pzjvBCWNFHWVxq4ujnCTT2VSpCpkjKGwT22shyOXqSN6FhA==",
+  "dgSpecHash": "2NcA0WdlP3ROlqkOd6hV35QhO9iZOHcGBmLeLxlO06G5I9xgoqyJM4aZ/KNOfX1sR9MHeq07miWJP7VlIjyKmA==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Assignment\\Backend\\Library.csproj",
+  "projectFilePath": "d:\\Work\\Assignment\\Backend\\Library.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\suman\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\suman\\.nuget\\packages\\autofac.webapi2\\6.1.0\\autofac.webapi2.6.1.0.nupkg.sha512",
     "C:\\Users\\suman\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\suman\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\suman\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -85,5 +87,16 @@
     "C:\\Users\\suman\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
     "C:\\Users\\suman\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Autofac.WebApi2 6.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Autofac.WebApi2",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
